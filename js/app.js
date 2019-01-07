@@ -30,12 +30,12 @@ let validation = {
   zip: {
       field: 'zip',
       isValid: false,
-      message: 'Please enter a valid zip code'
+      message: 'invalid zip'
     },
   cvv: {
       field: 'cvv',
       isValid: false,
-      message: 'Please enter a valid CVV'
+      message: 'invalid CVV'
     },
   registered: {
       isValid: false,
@@ -194,10 +194,10 @@ $('#name').on('focusin', function(e) {
 });
 $('#name').on('focusout', function(e) {
   $('#name').attr('placeholder','')
-  if($('#name').val().length>0){
+  const nameRegEx = /^[a-zA-Z\s]+$/;
+  if(nameRegEx.test($(this).val())){
     validation.name.isValid = true;
-  }
-  if($('#name').val().length===0){
+  } else {
     validation.name.isValid = false;
   }
 });
@@ -285,17 +285,18 @@ HANDLER CHECKS VALIDATION OBJECT AND PREVENTS SUBMISSION IF ANY FALSE VALUES ARE
 * * * * */
 $('form').on('submit', function(e) {
   //Errors are initially removed
+  $('#name').attr('placeholder', '');
   $('.activityError').remove();
-  $('.error-message').remove();
-  //Loops through validation object to check isValid values
+  //Loops through validation object to check isValid values. Error-border is added if false and placeholder text is added to corresponding input for feedback.
   $.each(validation, function(key, value){
   	if(value.isValid === false) {
       e.preventDefault();
-      $('button').after(`<p class='error-message'>${value.message}</p>`);
-      $(`#${value.field}`).addClass('error-border')
+      $(`#${value.field}`).val('');
+      $(`#${value.field}`).addClass('error-border');
+      $(`#${value.field}`).attr('placeholder',`${value.message}`);
   	}
     if(value.isValid === true) {
-      $(`#${value.field}`).removeClass('error-border')
+      $(`#${value.field}`).removeClass('error-border');
     }
   })
   if(validation.registered.isValid === false) {
