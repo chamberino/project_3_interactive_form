@@ -143,7 +143,8 @@ const activities = $('#activities').on('change', function(e) {
       }
     });
   }
-  //Validation Object is updated based on runningTotal value
+  //Validation Object is updated based on runningTotal value Error is written
+  //to page if runningTotal=0 (no activities are selected).
   if(runningTotal>0){
       validation.registered.isValid = true;
       $('.activityError').remove();
@@ -216,36 +217,46 @@ $('#mail').on('focusout', function(e) {
 Handler checks for valid email format and displays error message until valid string is entered
 * * * * * * * */
 $('#mail').on('keyup', function(e) {
+  //error message is written to page (but hidden at first) if it doesn't already exist.
   if($('span.error').length === 0){
     $('#mail').after(`<div class=errorDiv><span class="error" style=display:none>Must be a valid email address</span></div>`);
   }
+  //Regex is declared and used to test email input. Error-div is hidden if input passes.
   const emailRegEx = /^[^@]+@[^@.]+\.[a-z]+$/i;
   if(emailRegEx.test($(this).val()) || $('#mail').val()
  === '') {
     $('span.error').hide();
     validation.email.isValid = true;
   };
+// If string fails regex test, the error div is shown.
   if(emailRegEx.test($(this).val())!==true) {
     $('span.error').text('Must be a valid email address')
     $('span.error').show();
     validation.email.isValid = false;
   }
+  //If no input exists, but field is focused, a different error message is written.
   if($('#mail').val().length === 0){
     $('span.error').text('Please enter email address')
   }
 })
-function isValidEmail(email) {
-  return /^[^@]+@[^.]+.[a-z]{3}$/i.test(email)
-}
 
 
+// TRIED CREATING HELPER FUNCTION TO MAKE CC, ZIP, AND CVV VALIDATORS MORE DRY BUT COULD NOT GET IT TO WORK.
+// function validate(regEx, statusObject, e) {
+//     if(regEx.test($(this).val())){
+//       statusObject = true;
+//     }
+//     else {
+//       statusObject = false;
+//     }
+// }
 
 $('#cc-num').on('keyup', function(e) {
   const ccRegEx = /^\d{13,16}$/;
   if(ccRegEx.test($(this).val())){
     validation.creditCard.isValid = true;
-  };
-  if(ccRegEx.test($(this).val()) === false){
+  }
+  else {
     validation.creditCard.isValid = false;
   }
 });
@@ -273,7 +284,10 @@ $('#cvv').on('keyup', function(e) {
 HANDLER CHECKS VALIDATION OBJECT AND PREVENTS SUBMISSION IF ANY FALSE VALUES ARE ENCOUNTERED
 * * * * */
 $('form').on('submit', function(e) {
+  //Errors are initially removed
+  $('.activityError').remove();
   $('.error-message').remove();
+  //Loops through validation object to check isValid values
   $.each(validation, function(key, value){
   	if(value.isValid === false) {
       e.preventDefault();
@@ -284,4 +298,7 @@ $('form').on('submit', function(e) {
       $(`#${value.field}`).removeClass('error-border')
     }
   })
+  if(validation.registered.isValid === false) {
+    $('#activities').after(`<p class="activityError" style="color:#e5001a; margin-top:0;">Please select an activity</p>`);
+  }
 })
