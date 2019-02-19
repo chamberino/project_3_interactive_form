@@ -12,17 +12,37 @@ label[for=exp-month] {
 body,
 input,
 button {
- font-family: 'Roboto', sans-serif;
+  font: .7rem/1.5 'Merriweather', serif, Helvetica, 'Century Gothic';
 }
 
 body {
-  font: 1em/1.5;
-  color: #184f68;
-	background: #accbd9;
+  margin: 0;
+  color: #2d3944;
+  background-color: #D3DDDC;
+  min-height: 100vh;
 }
 
-header {
-	text-align: center;
+h2 {
+  font-weight: 300;
+  color: #fff;
+  margin: 0;
+  font-size: 1.25em;
+}
+
+#formTitle {
+  font-size: .75em;
+  background-color: #2d3944;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+  padding: 3em;
+  width: 100%;
+}
+
+.container {
+  /* background-color: #D3DDDC */
 }
 
 h1 {
@@ -37,7 +57,7 @@ a {
 
 .errorDiv {
   position: relative;
-  margin-bottom: 1em;
+  /* margin-bottom: 3.5em; */
 }
 span.error {
 display: block;
@@ -70,14 +90,52 @@ span:after {
   /* margin-bottom: 3em; */
 }
 
+#signup {
+  margin-top: 0;
+  text-align: center;
+  border-bottom: 4px solid #2d3944;
+  padding: .75em .5em 1.5em;
+  position: relative;
+  margin-bottom: 2em;
+}
+
+#signup::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 2px solid #2d3944;
+  top: -8px;
+  bottom: -9px;
+  left: 0px;
+  right: -8px;
+}
+
+#signup h1 {
+  font-size: 2em;
+  margin-bottom: .25em;
+}
+
+#signup h2 {
+  font-size: 1.25em;
+  color: #7c7c7c;
+}
+
 
 /* =================================
   Form Element Styles
 ==================================== */
 
 form {
-	padding: .875em 1.875em 1.875em;
-	background: #85b5ca;
+	/* padding: .875em 1.875em 1.875em; */
+	/* background: #85b5ca; */
+}
+
+form {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 0;
+  padding: 0 20px 12px;
+  background: #D3DDDC;
 }
 
 fieldset,
@@ -97,20 +155,59 @@ button {
 }
 
 legend {
-	font-weight: 500;
+  font-size: 1.5em;
+	font-weight: bold;
 	padding-top: .5em;
-	border-top: 2px solid #679cb3;
+	border-top: 2px solid #2d3944;
 	margin-bottom: 1.125em;
+  width: 100%;
 }
 
-input[type="text"],
+.info {
+  border: none;
+}
+
+/* input[type="text"],
 input[type="email"],
 legend {
 	width: 100%;
+} */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 8px;
+  display: block;
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  width: 100%;
+  background-color: #ededed;
+  color: #8a97a0;
+  margin-bottom: 22px;
+  border:2px solid transparent; /* compensates for focus border */
+  transition: all .25s ease-out;
+}
+
+input[type="email"] {
+  /* padding: 0; */
+  margin: .5em 0;
+}
+
+label[for="title"] {
+  margin-top: 1.5em;
 }
 
 label {
-	color: #000;
+	color: #7c7c7c;
+  font-size: 1.25em;
 	display: block;
 	margin-bottom: .5em;
 }
@@ -152,12 +249,16 @@ button:hover {
 	background: #184c62;
 }
 
+.total, .activityError {
+  font-size: 1.25em;
+}
+
 /* =================================
   Page Styles
 ==================================== */
 
 .container {
-	margin: auto;
+	margin: 2em auto;
 	max-width: 680px;
 }
 
@@ -181,6 +282,15 @@ button:hover {
 .error-border {
   border: 2px solid #e5001a;
 }
+
+footer {
+  color: #8a97a0;
+  text-align: center;
+  font-style: italic;
+  margin-top: 0;
+  padding-bottom: 2.75em;
+  background-color: #D3DDDC;
+}
 /* =================================
   Helper Classes
 ==================================== */
@@ -203,19 +313,40 @@ button:hover {
   Media Queries
 ==================================== */
 
-@media (min-width: 0) and (max-width: 679px) {
-	header {
-		padding: 2em 0;
-	}
+@media (min-width: 0) and (max-width: 768px) {
 	button {
 		width: 100%;
 	}
 }
 
-@media (min-width: 680px) {
+@media (min-width: 768px) {
+  body {
+    background-color: #fff;
+  }
 	header {
-		padding: 4.65em 0 2.5em;
+		/* padding: 4.65em 0 2.5em; */
 	}
+  form {
+  max-width: 600px;
+  margin: 10px auto;
+  margin-top: 2em;
+  border-radius: .2em;
+  border: solid 1px #fff;
+  box-shadow: 0 1px 14px rgba(0,0,0, .12);
+  }
+  button {
+    margin-top: 0;
+    padding: 1.5em 8em;
+    text-align: center;
+  }
+  .button {
+    margin: 1.25em auto;
+    text-align: center;
+  }
+  footer {
+  background-color: #fff;
+  padding-top: 1.75em;
+  }
 	.col {
 		float: left;
 	}

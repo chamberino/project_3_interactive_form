@@ -5,21 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Register for Full Stack Conf</title>
   <link rel="stylesheet" href="css/normalize.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="container">
 
     <header>
-      <span>Register for</span>
-      <h1>Full Stack Conf</h1>
+      <div id="formTitle">
+        <!-- <h2>Register for</h2> -->
+        <h1>Full Stack Con</h1>
+      </div>
     </header>
 
+    <div class="container">
     <form action="index.html" method="post">
+      <div id="signup">
+        <h1>Signup to reserve your spot!</h1>
+        <h2>Full Stack Con is a 2-day series of introductory and advanced workshops and industry talks about JavaScript.</h2>
+      </div>
 
       <fieldset>
-        <legend>Basic Info</legend>
+        <legend class='info'>Basic Info</legend>
 
         <label for="name">Name:</label>
         <input type="text" id="name" name="user_name">
@@ -148,11 +154,14 @@
 
       </fieldset>
 
-      <button type="submit">Register</button>
+      <div class="button">
+        <button type="submit">Register</button>
+      </div>
 
     </form>
 
 	</div>
+  <footer>&copy; The Code Review</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/app.js"></script>
 </body>

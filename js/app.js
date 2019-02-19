@@ -30,12 +30,12 @@ let validation = {
   zip: {
       field: 'zip',
       isValid: false,
-      message: 'invalid zip'
+      message: 'Invalid Zip'
     },
   cvv: {
       field: 'cvv',
       isValid: false,
-      message: 'invalid CVV'
+      message: 'Invalid CVV'
     },
   registered: {
       isValid: false,
@@ -211,6 +211,7 @@ $('#mail').on('focusin', function(e) {
 $('#mail').on('focusout', function(e) {
   $('#mail').attr('placeholder','')
   $('span.error').hide();
+  $('.errorDiv').css('margin-bottom','0em');
 });
 
 /* * * * * * * *
@@ -220,6 +221,7 @@ $('#mail').on('keyup', function(e) {
   //error message is written to page (but hidden at first) if it doesn't already exist.
   if($('span.error').length === 0){
     $('#mail').after(`<div class=errorDiv><span class="error" style=display:none>Must be a valid email address</span></div>`);
+    $('.errorDiv').css('margin-bottom','3.5em');
   }
   //Regex is declared and used to test email input. Error-div is hidden if input passes.
   const emailRegEx = /^[^@]+@[^@.]+\.[a-z]+$/i;
@@ -227,11 +229,13 @@ $('#mail').on('keyup', function(e) {
  === '') {
     $('span.error').hide();
     validation.email.isValid = true;
+    $('.errorDiv').css('margin-bottom','0em');
   };
 // If string fails regex test, the error div is shown.
   if(emailRegEx.test($(this).val())!==true) {
     $('span.error').text('Must be a valid email address')
     $('span.error').show();
+    $('.errorDiv').css('margin-bottom','3.5em');
     validation.email.isValid = false;
   }
   //If no input exists, but field is focused, a different error message is written.
@@ -294,6 +298,7 @@ $('form').on('submit', function(e) {
       $(`#${value.field}`).val('');
       $(`#${value.field}`).addClass('error-border');
       $(`#${value.field}`).attr('placeholder',`${value.message}`);
+      $('button').css("border", "2px solid #e5001a");
   	}
     if(value.isValid === true) {
       $(`#${value.field}`).removeClass('error-border');
